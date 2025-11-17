@@ -180,7 +180,10 @@
 
 - **Node.js 18+** and npm/yarn/pnpm
 - **PostgreSQL** database (local or cloud)
-- **OpenAI API key** (for AI chat features)
+- **AI Backend** (choose one):
+  - OpenAI API key (~$0.60/month) - **Recommended**
+  - Ollama installed (free, local) - **Best for classrooms**
+  - Mock AI (no setup, demo mode) - **For testing**
 
 ### Installation
 
@@ -215,10 +218,17 @@
    NEXTAUTH_URL="http://localhost:3000"
    NEXTAUTH_SECRET="your-generated-secret-key"
 
-   # OpenAI API
+   # AI Configuration (choose one)
+   AI_PROVIDER="auto"  # auto, openai, ollama, or mock
+
+   # Option 1: OpenAI (~$0.60/month)
    OPENAI_API_KEY="sk-your-openai-api-key"
 
-   # Optional: Azure Speech Services (for advanced pronunciation)
+   # Option 2: Ollama (free)
+   OLLAMA_BASE_URL="http://localhost:11434"
+   OLLAMA_MODEL="llama2"
+
+   # Optional: Azure Speech Services
    AZURE_SPEECH_KEY="your-azure-key"
    AZURE_SPEECH_REGION="eastus"
 
@@ -226,6 +236,8 @@
    NEXT_PUBLIC_APP_NAME="English Buddy"
    NEXT_PUBLIC_APP_URL="http://localhost:3000"
    ```
+
+   **Note**: See [SETUP_AI.md](./SETUP_AI.md) for detailed AI setup instructions!
 
 4. **Set up the database**
    ```bash
@@ -360,15 +372,72 @@ englishbuddy/
 
 ---
 
-## 🔐 API Keys Setup
+## 🤖 AI Configuration - 3 Options Available!
 
-### Required: OpenAI API Key
+English Buddy supports **multiple AI backends** - choose based on your needs:
 
-1. Sign up at [OpenAI Platform](https://platform.openai.com/)
-2. Navigate to **API keys** section
-3. Create a new API key
-4. Add to `.env` as `OPENAI_API_KEY`
-5. **Note**: GPT-4o-mini is cost-effective (~$0.15-0.60 per million tokens)
+### 📊 Quick Comparison
+
+| Option | Cost | Quality | Setup Time | Internet Required |
+|--------|------|---------|------------|-------------------|
+| **OpenAI API** | ~$0.60/month | ⭐⭐⭐⭐⭐ Excellent | 5 min | Yes |
+| **Ollama (Free)** | $0 | ⭐⭐⭐⭐ Good | 10 min | No |
+| **Mock (Demo)** | $0 | ⭐⭐ Basic | 0 min | No |
+
+### 🎯 Option 1: OpenAI API (Recommended for Best Quality)
+
+**Perfect for**: Best conversation quality, minimal cost
+
+```bash
+# 1. Get API key from https://platform.openai.com
+# 2. Add to .env:
+OPENAI_API_KEY="sk-your-api-key"
+AI_PROVIDER="openai"  # or "auto"
+
+# Cost: ~$0.60/month for typical usage
+# Free: $5 credits for new users
+```
+
+### 🆓 Option 2: Ollama (100% Free Local AI)
+
+**Perfect for**: Classrooms, privacy, unlimited usage
+
+```bash
+# 1. Install Ollama: https://ollama.ai
+# 2. Download model:
+ollama pull llama2
+
+# 3. Add to .env:
+OLLAMA_BASE_URL="http://localhost:11434"
+OLLAMA_MODEL="llama2"
+AI_PROVIDER="ollama"  # or "auto"
+
+# Runs locally, no internet needed!
+```
+
+### 🎭 Option 3: Mock AI (Instant Demo)
+
+**Perfect for**: Testing, development
+
+```bash
+# No setup required!
+AI_PROVIDER="mock"
+
+# Or just don't configure any AI keys
+# Mock AI activates automatically
+```
+
+### 🔄 Auto Mode (Smart Selection)
+
+Let English Buddy choose automatically:
+
+```bash
+AI_PROVIDER="auto"  # Default
+
+# Priority: OpenAI > Ollama > Mock
+```
+
+**📖 Detailed Setup Guide**: See [SETUP_AI.md](./SETUP_AI.md) for complete instructions!
 
 ### Optional: Azure Speech Services
 
