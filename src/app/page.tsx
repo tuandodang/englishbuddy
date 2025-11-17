@@ -97,6 +97,14 @@ export default function HomePage() {
       color: 'from-purple-500 to-purple-700',
       badge: 'NEW',
     },
+    {
+      icon: Award,
+      title: 'AI Settings',
+      description: 'Configure AI (OpenAI/Ollama/Mock)',
+      href: '/settings',
+      color: 'from-blue-500 to-cyan-500',
+      badge: 'NEW',
+    },
   ];
 
   const games = [

@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import toast from 'react-hot-toast';
+import { AIStatusIndicator } from '@/components/AIStatusIndicator';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -155,7 +156,7 @@ export default function ConversationPage() {
             <span className="font-bold text-xl">Chat with Buddy</span>
           </div>
 
-          <div className="w-24" /> {/* Spacer for layout balance */}
+          <AIStatusIndicator showDetails />
         </div>
 
         {/* Mode Selection */}
@@ -312,9 +313,12 @@ export default function ConversationPage() {
             </button>
           </div>
 
-          <div className="mt-3 flex items-center justify-center gap-2 text-sm text-gray-500">
-            <Sparkles className="w-4 h-4" />
-            <span>Powered by AI - Safe for kids</span>
+          <div className="mt-3 flex items-center justify-center gap-4 text-sm text-gray-500">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4" />
+              <span>Powered by AI - Safe for kids</span>
+            </div>
+            <AIStatusIndicator />
           </div>
         </div>
       </div>
