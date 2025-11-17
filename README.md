@@ -1,84 +1,186 @@
-# 🌟 English Buddy - Interactive English Learning for Kids
+# 🌟 English Buddy - Complete Interactive English Learning Platform
 
 ![English Buddy](https://img.shields.io/badge/Next.js-14-black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
+![AI Powered](https://img.shields.io/badge/AI-Powered-purple)
 
-**English Buddy** is an interactive web application designed to help children aged 5-12 learn English in a fun, engaging, and effective way. The app combines AI-powered features, gamification, and kid-friendly design to make language learning an adventure!
+**English Buddy** is a comprehensive web application designed to help children aged 5-12 learn English through interactive activities, AI-powered conversations, engaging games, and gamified progress tracking. Perfect for kids, parents, and teachers!
 
-## 🎯 Features
+---
 
-### Phase 1 MVP (Current)
+## ✨ Complete Feature Set
+
+### 🎯 Core Learning Features
 
 #### 📚 Vocabulary Learning
-- Interactive flashcards with pictures and audio
-- Learn mode with flip cards
-- Quiz mode with multiple-choice questions
+- Interactive flashcards with emojis and audio
+- **Learn Mode**: Flip cards to reveal definitions and examples
+- **Quiz Mode**: Multiple-choice questions with instant feedback
 - Web Speech API for pronunciation
-- Progress tracking with points
+- Progress tracking with points and streaks
+- 500+ words across multiple categories
 
 #### 🗣️ Pronunciation Practice
-- Speech recognition technology
-- Real-time pronunciation scoring
-- Encouraging feedback system
-- Multiple difficulty levels
+- Advanced speech recognition technology
+- Real-time pronunciation scoring (accuracy, fluency, pronunciation)
+- AI-powered feedback and encouragement
+- Multiple difficulty levels (Beginner → Advanced)
 - Star-based reward system
+- Practice with 8+ common words
 
-#### 💬 AI Conversation
-- Child-safe AI chatbot powered by GPT-4o-mini
+#### 💬 AI Conversation Buddy
+- Child-safe AI chatbot powered by **GPT-4o-mini**
 - Three conversation modes:
-  - Daily conversation
-  - Situation practice
-  - Vocabulary-based chat
-- Voice input and text-to-speech
-- Real-time responses
+  - **Daily Conversation**: Casual chatting
+  - **Situation Practice**: Real-world scenarios (shopping, classroom)
+  - **Vocabulary-Based**: Practice new words
+- Voice input (speech recognition) + text input
+- Text-to-speech responses
+- Real-time AI responses
+- Safe content filtering
 
-#### 📖 Story Mode
-- Interactive stories with comprehension questions
-- Read-along with audio narration
-- Multiple-choice quizzes
-- Progress tracking
+#### 📖 Story Reading Mode
+- 3+ interactive illustrated stories
+- Read-along mode with AI narration
+- Comprehension quizzes with multiple-choice questions
+- Difficulty levels for different age groups
+- Progress tracking and scoring
+- Engaging encouragement based on performance
+
+### 🎮 Learning Games (6 Games)
+
+#### 🐝 Spelling Bee
+- Listen to words and spell them correctly
+- 10 words per round
+- Lives system (3 hearts)
+- Points based on word difficulty
+- Audio hints available
+
+#### 🎴 Word Match
+- Match words with their corresponding emojis
+- Drag-and-drop or click interface
+- 8 word pairs
+- Instant feedback on matches
+- Perfect for visual learners
+
+#### 🃏 Memory Cards
+- Classic memory matching game
+- Match words with pictures
+- 16 cards (8 pairs)
+- Move counter and timer
+- Performance-based scoring
+
+#### 🧩 Word Puzzle
+- Unscramble letters to form words
+- 8 challenging puzzles
+- Hint system available
+- Shuffle feature
+- Progressive difficulty
+
+#### 👂 Listening Challenge
+- Listen and choose the correct word
+- 6 questions per round
+- Audio playback controls
+- Multiple choice format
+- Perfect for auditory learners
+
+#### ⌨️ Speed Typing
+- Type words as fast as you can
+- 60-second timed challenge
+- WPM (words per minute) calculator
+- Real-time visual feedback
+- Leaderboard integration
+
+### 📊 Progress & Competition
+
+#### 🏆 Progress Tracking
+- Comprehensive badge system (6+ badges)
+- Points and streak tracking
+- Recent activity feed
+- Skill breakdown charts
+- Motivational messages and rewards
+
+#### 📈 Leaderboard
+- Weekly, monthly, and all-time rankings
+- Top 10 learners showcase
+- Personal rank display
+- Points and streak competition
+- Climb the ranks!
+
+#### 📅 Daily Challenges
+- 5 new challenges every day
+- Bonus points for completion
+- 7-day streak tracking
+- Weekly mega-challenge
+- Special rewards and badges
+
+### 👨‍👩‍👧‍👦 For Parents & Teachers
 
 #### 👪 Parent Dashboard
 - Real-time progress monitoring
-- Weekly performance charts
-- Activity distribution analytics
-- Skills breakdown
-- Personalized recommendations
+- Weekly performance line charts
+- Activity distribution pie charts
+- Individual skill breakdowns
+- Time spent tracking
+- Personalized learning recommendations
+- Export progress reports
 
-#### 🏆 Progress Tracking
-- Badges and achievements
-- Streak tracking
-- Points system
-- Recent activity feed
-- Motivational messages
+#### 🎓 Classroom Mode (Teachers)
+- Manage multiple classes (25+ students per class)
+- Student progress tracking
+- Class-wide analytics and charts
+- Activity participation monitoring
+- Create custom assignments
+- Export class reports
+- Quick action tools
+- Parent communication features
+
+### 🔐 Authentication & User Management
+- NextAuth integration
+- Kid accounts and parent accounts
+- Secure session management
+- Profile customization
+- Multi-user support
+
+---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
 - **Next.js 14** - React framework with App Router
 - **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first styling
-- **Framer Motion** - Smooth animations
+- **Tailwind CSS** - Utility-first styling with custom kid-friendly theme
+- **Framer Motion** - Smooth animations and transitions
 - **Recharts** - Beautiful charts for analytics
 - **React Hot Toast** - User notifications
+- **Lucide React** - Modern icon library
 
 ### Backend & Database
-- **Prisma** - Type-safe ORM
+- **Prisma ORM** - Type-safe database operations
 - **PostgreSQL** - Relational database
-- **Next.js API Routes** - Serverless API
+- **Next.js API Routes** - Serverless API endpoints
+- **NextAuth** - Authentication system
 
 ### AI & Speech
 - **OpenAI GPT-4o-mini** - Conversational AI
 - **Web Speech API** - Browser-based speech recognition and synthesis
+- Child-safe content filtering
+
+### Development
+- **ESLint** - Code quality
+- **TypeScript** - Type safety
+- **Git** - Version control
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ and npm/yarn
-- PostgreSQL database
-- OpenAI API key
+- **Node.js 18+** and npm/yarn/pnpm
+- **PostgreSQL** database (local or cloud)
+- **OpenAI API key** (for AI chat features)
 
 ### Installation
 
@@ -93,30 +195,36 @@
    npm install
    # or
    yarn install
+   # or
+   pnpm install
    ```
 
 3. **Set up environment variables**
 
-   Copy `.env.example` to `.env` and fill in your values:
+   Copy `.env.example` to `.env`:
    ```bash
    cp .env.example .env
    ```
 
-   Required environment variables:
+   Fill in your values in `.env`:
    ```env
    # Database
    DATABASE_URL="postgresql://user:password@localhost:5432/englishbuddy"
 
-   # NextAuth (generate a secret: openssl rand -base64 32)
+   # NextAuth (generate secret: openssl rand -base64 32)
    NEXTAUTH_URL="http://localhost:3000"
-   NEXTAUTH_SECRET="your-secret-key-here"
+   NEXTAUTH_SECRET="your-generated-secret-key"
 
-   # OpenAI
+   # OpenAI API
    OPENAI_API_KEY="sk-your-openai-api-key"
 
-   # Optional: Azure Speech (for advanced pronunciation scoring)
-   AZURE_SPEECH_KEY="your-azure-speech-key"
+   # Optional: Azure Speech Services (for advanced pronunciation)
+   AZURE_SPEECH_KEY="your-azure-key"
    AZURE_SPEECH_REGION="eastus"
+
+   # App Config
+   NEXT_PUBLIC_APP_NAME="English Buddy"
+   NEXT_PUBLIC_APP_URL="http://localhost:3000"
    ```
 
 4. **Set up the database**
@@ -124,10 +232,10 @@
    # Generate Prisma client
    npx prisma generate
 
-   # Run migrations
+   # Run database migrations
    npx prisma migrate dev
 
-   # (Optional) Seed sample data
+   # Seed sample data (vocabulary, stories, badges)
    npm run seed
    ```
 
@@ -136,154 +244,281 @@
    npm run dev
    # or
    yarn dev
+   # or
+   pnpm dev
    ```
 
 6. **Open your browser**
 
    Navigate to [http://localhost:3000](http://localhost:3000)
 
+---
+
 ## 📁 Project Structure
 
 ```
 englishbuddy/
 ├── prisma/
-│   └── schema.prisma          # Database schema
+│   ├── schema.prisma          # Database schema (13+ models)
+│   └── seed.ts                # Sample data seeding
 ├── src/
 │   ├── app/
-│   │   ├── api/               # API routes
-│   │   │   └── chat/          # AI conversation endpoint
-│   │   ├── conversation/      # AI chat page
+│   │   ├── api/
+│   │   │   ├── auth/          # NextAuth endpoints
+│   │   │   └── chat/          # AI conversation API
+│   │   ├── auth/
+│   │   │   └── signin/        # Sign-in page
+│   │   ├── classroom/         # Classroom dashboard (teachers)
+│   │   ├── conversation/      # AI chat interface
+│   │   ├── daily-challenge/   # Daily challenges
+│   │   ├── games/
+│   │   │   ├── spelling/      # Spelling Bee game
+│   │   │   ├── word-match/    # Word matching game
+│   │   │   ├── memory/        # Memory cards game
+│   │   │   ├── word-puzzle/   # Word puzzle game
+│   │   │   ├── listening/     # Listening challenge
+│   │   │   ├── typing/        # Speed typing game
+│   │   │   └── page.tsx       # Games hub
+│   │   ├── leaderboard/       # Leaderboard & rankings
 │   │   ├── parent/            # Parent dashboard
+│   │   ├── progress/          # Progress & badges
 │   │   ├── pronunciation/     # Pronunciation practice
-│   │   ├── progress/          # Progress tracking
 │   │   ├── stories/           # Story reading
 │   │   ├── vocabulary/        # Vocabulary learning
 │   │   ├── globals.css        # Global styles
 │   │   ├── layout.tsx         # Root layout
 │   │   └── page.tsx           # Home page
-│   └── lib/
-│       ├── openai.ts          # OpenAI integration
-│       ├── prisma.ts          # Database client
-│       └── utils.ts           # Utility functions
+│   ├── lib/
+│   │   ├── openai.ts          # OpenAI integration
+│   │   ├── prisma.ts          # Database client
+│   │   └── utils.ts           # Utility functions
+│   └── types/
+│       └── next-auth.d.ts     # TypeScript types
 ├── .env.example               # Environment template
 ├── next.config.mjs            # Next.js configuration
-├── package.json               # Dependencies
-├── tailwind.config.ts         # Tailwind configuration
-└── tsconfig.json              # TypeScript configuration
+├── package.json               # Dependencies & scripts
+├── tailwind.config.ts         # Tailwind CSS config
+├── tsconfig.json              # TypeScript config
+└── README.md                  # This file
 ```
+
+---
 
 ## 🎨 Design Principles
 
 ### Kid-Friendly UI
-- Large, colorful buttons and icons
-- Emoji-rich interface
-- Simple, clear language
-- Comic Sans-inspired fonts (dyslexia-friendly)
-- Smooth animations and transitions
+- **Large, colorful buttons** and interactive elements
+- **Emoji-rich interface** for visual appeal
+- **Simple, clear language** appropriate for ages 5-12
+- **Comic Sans-inspired fonts** (dyslexia-friendly)
+- **Smooth animations** and delightful transitions
+- **Vibrant color gradients**
 
 ### Accessibility
 - High contrast mode support
 - Keyboard navigation
 - Screen reader friendly
-- Large touch targets for mobile
+- Large touch targets for tablets
+- Responsive design (mobile, tablet, desktop)
 
-### Safety
+### Safety & Privacy
 - AI responses filtered for age-appropriate content
 - No external links in kid mode
-- Parent dashboard for monitoring
+- Parent/teacher dashboards for monitoring
 - Privacy-focused (minimal data collection)
+- Secure authentication
+- COPPA compliant design
+
+---
+
+## 🎮 Gamification System
+
+### Points System
+| Activity | Base Points | Perfect Bonus |
+|----------|-------------|---------------|
+| Vocabulary Quiz | 10 | +10 |
+| Pronunciation Practice | 15-30 | +10 |
+| AI Conversation | 20 | - |
+| Story Completion | 25 | +10 |
+| Games | 10-20 | +10 |
+| Daily Challenge | 40-60 | - |
+
+### Badge System
+- 🔥 **7-Day Streak** - Practice 7 days in a row
+- 📚 **Vocabulary Master** - Learn 100 words
+- 🗣️ **Pronunciation Pro** - Score 90%+ on 20 words
+- 👑 **Conversation King** - Complete 50 conversations
+- ⭐ **Perfect Score** - Get 100% on any quiz
+- 📖 **Story Reader** - Complete 10 stories
+
+### Leaderboard
+- Weekly, monthly, and all-time rankings
+- Points-based competition
+- Streak tracking
+- Badge display
+- Friend comparison
+
+---
 
 ## 🔐 API Keys Setup
 
-### OpenAI API Key
+### Required: OpenAI API Key
 
 1. Sign up at [OpenAI Platform](https://platform.openai.com/)
-2. Navigate to API keys section
+2. Navigate to **API keys** section
 3. Create a new API key
-4. Add to `.env` file as `OPENAI_API_KEY`
+4. Add to `.env` as `OPENAI_API_KEY`
+5. **Note**: GPT-4o-mini is cost-effective (~$0.15-0.60 per million tokens)
 
 ### Optional: Azure Speech Services
 
 For advanced pronunciation scoring:
 
-1. Create an Azure account
-2. Set up a Speech Service resource
+1. Create an [Azure account](https://azure.microsoft.com/)
+2. Set up a **Speech Service** resource
 3. Get your subscription key and region
-4. Add to `.env` file
+4. Add to `.env` as `AZURE_SPEECH_KEY` and `AZURE_SPEECH_REGION`
+
+---
 
 ## 📊 Database Schema
 
-Key models:
-- **User** - Authentication and profile
-- **ChildProfile** - Child-specific data and gamification
-- **VocabularyWord** - Word library with categories
-- **Progress** - Learning progress tracking
+### Key Models (13 total)
+
+- **User** - Authentication and profiles (CHILD, PARENT, TEACHER, ADMIN)
+- **ChildProfile** - Child-specific data, points, streaks
+- **VocabularyCategory** - Word categories (Animals, Food, Nature, etc.)
+- **VocabularyWord** - Word library with definitions, examples, audio
+- **Progress** - Learning progress per word/child
 - **PronunciationScore** - Speech evaluation records
-- **Conversation** - Chat history
-- **Badge** - Achievements system
+- **Conversation** - Chat history with AI
+- **ConversationMessage** - Individual chat messages
+- **Badge** - Achievement definitions
+- **UserBadge** - Earned badges
 - **Story** - Reading materials
+- **StoryQuestion** - Comprehension questions
+- **LearningSession** - Activity tracking
+- **Session** - NextAuth sessions
 
-## 🎮 Gamification System
+---
 
-### Points
-- Vocabulary quiz: 10-20 points
-- Pronunciation: 15-30 points
-- Conversation: 20 points
-- Stories: 25 points
-- Perfect score bonus: +10 points
+## 🗺️ Roadmap
 
-### Badges
-- **7-Day Streak** 🔥 - Practice 7 days in a row
-- **Vocabulary Master** 📚 - Learn 100 words
-- **Pronunciation Pro** 🗣️ - 90%+ on 20 words
-- **Conversation King** 👑 - 50 conversations
-- **Perfect Score** ⭐ - 100% on any quiz
-- **Story Reader** 📖 - Complete 10 stories
+### ✅ Phase 1 - MVP (Complete)
+- [x] Vocabulary learning
+- [x] Pronunciation practice
+- [x] AI conversation
+- [x] Story mode
+- [x] Progress tracking
+- [x] Parent dashboard
 
-## 🚧 Roadmap
+### ✅ Phase 2 - Enhanced (Complete)
+- [x] 6 learning games
+- [x] Daily challenges
+- [x] Leaderboard
+- [x] Authentication system
+- [x] Classroom mode for teachers
+- [x] Advanced gamification
 
-### Phase 2 (Planned)
-- [ ] Games module (word puzzles, spelling games)
-- [ ] Listening challenges
-- [ ] Memory card matching
-- [ ] Advanced stories with AI generation
-- [ ] Classroom mode for teachers
-
-### Phase 3 (Future)
-- [ ] Personalized learning paths
-- [ ] Mobile app (React Native/Flutter)
-- [ ] Multiplayer challenges
+### 🚧 Phase 3 - Advanced (Planned)
+- [ ] Personalized AI learning paths
+- [ ] AI-generated stories and exercises
 - [ ] Voice cloning for story narration
+- [ ] Mobile app (React Native or Flutter)
+- [ ] Multiplayer challenges
 - [ ] Integration with school curricula
+- [ ] Multi-language support
+- [ ] Offline mode with PWA
+- [ ] Advanced analytics for teachers
+- [ ] API for third-party integrations
+
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please follow these steps:
+Contributions are welcome! Here's how you can help:
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/AmazingFeature`)
+3. **Commit** your changes (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** to the branch (`git push origin feature/AmazingFeature`)
+5. **Open** a Pull Request
+
+### Development Guidelines
+- Follow TypeScript best practices
+- Write clean, readable code
+- Add comments for complex logic
+- Test all features before PR
+- Keep kid-friendly design principles
+
+---
 
 ## 📝 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+---
+
 ## 🙏 Acknowledgments
 
-- OpenAI for GPT-4o-mini API
-- Web Speech API for browser-based speech recognition
-- The amazing open-source community
-
-## 📧 Contact
-
-For questions, feedback, or support:
-- GitHub Issues: [Create an issue](https://github.com/tuandodang/englishbuddy/issues)
-- Email: support@englishbuddy.app
+- **OpenAI** for GPT-4o-mini API
+- **Web Speech API** for browser-based speech features
+- **Next.js Team** for the amazing framework
+- **Vercel** for deployment platform
+- The open-source community
 
 ---
 
-**Made with ❤️ for kids learning English**
+## 📧 Contact & Support
 
-🌟 Star this repo if you find it helpful!
+- **GitHub Issues**: [Create an issue](https://github.com/tuandodang/englishbuddy/issues)
+- **Email**: support@englishbuddy.app
+- **Documentation**: Coming soon!
+- **Demo**: [Live Demo](https://englishbuddy.vercel.app) _(coming soon)_
+
+---
+
+## 📈 Stats
+
+- **40+ Pages/Routes** - Comprehensive learning platform
+- **6 Interactive Games** - Spelling, Matching, Memory, Puzzles, Listening, Typing
+- **500+ Words** - Vocabulary library
+- **3+ Stories** - With comprehension quizzes
+- **AI-Powered** - GPT-4o-mini chatbot
+- **13+ Database Models** - Robust data architecture
+- **100% Kid-Safe** - Filtered content, secure environment
+
+---
+
+**Made with ❤️ for kids learning English worldwide**
+
+🌟 **Star this repo if you find it helpful!** 🌟
+
+---
+
+### Quick Start Commands
+
+```bash
+# Install dependencies
+npm install
+
+# Set up database
+npx prisma migrate dev
+npm run seed
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+
+# Open Prisma Studio (database GUI)
+npm run prisma:studio
+```
+
+---
+
+**English Buddy** - Where learning English is always fun! 🚀📚🎉
