@@ -14,6 +14,8 @@ import {
 import Link from 'next/link';
 import toast from 'react-hot-toast';
 import Confetti from 'react-confetti';
+import { BuddyMascot, Encouragement } from '@/components/BuddyMascot';
+import { playSuccess, playTryAgain, playCelebration, playClick, playStar } from '@/lib/soundEffects';
 
 interface VocabularyWord {
   id: string;
@@ -31,6 +33,7 @@ export default function VocabularyPage() {
   const [showConfetti, setShowConfetti] = useState(false);
   const [mode, setMode] = useState<'learn' | 'quiz'>('learn');
   const [quizAnswer, setQuizAnswer] = useState<boolean | null>(null);
+  const [showEncouragement, setShowEncouragement] = useState<'correct' | 'incorrect' | 'complete' | 'start' | null>(null);
 
   // Sample vocabulary data (in production, fetch from API)
   const words: VocabularyWord[] = [
@@ -84,6 +87,7 @@ export default function VocabularyPage() {
     utterance.rate = 0.8; // Slow speed for kids
     utterance.pitch = 1.1; // Slightly higher pitch
     speechSynthesis.speak(utterance);
+    playClick(); // Add fun sound effect
   };
 
   const nextWord = () => {
@@ -91,10 +95,16 @@ export default function VocabularyPage() {
       setCurrentIndex(currentIndex + 1);
       setFlipped(false);
       setQuizAnswer(null);
+      playClick();
     } else {
       toast.success('Great job! You finished all words! 🎉');
       setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 5000);
+      playCelebration();
+      setShowEncouragement('complete');
+      setTimeout(() => {
+        setShowConfetti(false);
+        setShowEncouragement(null);
+      }, 5000);
     }
   };
 
@@ -103,6 +113,7 @@ export default function VocabularyPage() {
       setCurrentIndex(currentIndex - 1);
       setFlipped(false);
       setQuizAnswer(null);
+      playClick();
     }
   };
 
@@ -110,54 +121,81 @@ export default function VocabularyPage() {
     setQuizAnswer(isCorrect);
     if (isCorrect) {
       setScore(score + 10);
+      playSuccess();
+      playStar();
       toast.success('Correct! +10 points ⭐');
+      setShowEncouragement('correct');
+      setTimeout(() => {
+        setShowEncouragement(null);
+        nextWord();
+      }, 2000);
     } else {
+      playTryAgain();
       toast.error('Try again! 💪');
+      setShowEncouragement('incorrect');
+      setTimeout(() => {
+        setShowEncouragement(null);
+        nextWord();
+      }, 2000);
     }
-    setTimeout(() => {
-      nextWord();
-    }, 1500);
   };
 
   return (
     <div className="min-h-screen py-8 px-4">
       {showConfetti && <Confetti />}
+      {showEncouragement && (
+        <Encouragement
+          type={showEncouragement}
+          onComplete={() => setShowEncouragement(null)}
+        />
+      )}
 
       <div className="container mx-auto max-w-4xl">
+        {/* Mascot Welcome */}
+        <div className="mb-6 flex justify-center">
+          <BuddyMascot mood="excited" size="small" />
+        </div>
+
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <Link href="/">
-            <button className="kid-button bg-white hover:bg-gray-100 flex items-center gap-2">
+            <button className="kid-button bg-white hover:bg-gray-100 flex items-center gap-2" onClick={playClick}>
               <Home className="w-5 h-5" />
               Home
             </button>
           </Link>
 
           <div className="flex items-center gap-4">
-            <div className="kid-card flex items-center gap-2 bg-yellow-100">
-              <Star className="w-6 h-6 text-yellow-500 fill-yellow-500" />
-              <span className="text-2xl font-bold">{score}</span>
+            <div className="kid-card flex items-center gap-2 bg-yellow-100 glow">
+              <Star className="w-8 h-8 text-yellow-500 fill-yellow-500 animate-pulse" />
+              <span className="text-3xl font-bold">{score}</span>
             </div>
           </div>
         </div>
 
         {/* Mode Toggle */}
-        <div className="flex justify-center gap-4 mb-8">
+        <div className="flex justify-center gap-6 mb-8">
           <button
-            onClick={() => setMode('learn')}
-            className={`kid-button ${
+            onClick={() => {
+              setMode('learn');
+              playClick();
+            }}
+            className={`kid-button text-2xl ${
               mode === 'learn'
-                ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white'
+                ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-2xl scale-110'
                 : 'bg-white hover:bg-gray-100'
             }`}
           >
             📚 Learn Mode
           </button>
           <button
-            onClick={() => setMode('quiz')}
-            className={`kid-button ${
+            onClick={() => {
+              setMode('quiz');
+              playClick();
+            }}
+            className={`kid-button text-2xl ${
               mode === 'quiz'
-                ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white'
+                ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-2xl scale-110'
                 : 'bg-white hover:bg-gray-100'
             }`}
           >
@@ -166,20 +204,24 @@ export default function VocabularyPage() {
         </div>
 
         {/* Progress */}
-        <div className="mb-6">
-          <div className="flex justify-between text-sm text-gray-600 mb-2">
-            <span>
-              Word {currentIndex + 1} of {words.length}
+        <div className="mb-8">
+          <div className="flex justify-between text-xl font-bold text-gray-700 mb-3">
+            <span className="flex items-center gap-2">
+              📖 Word {currentIndex + 1} of {words.length}
             </span>
-            <span>{Math.round(((currentIndex + 1) / words.length) * 100)}% Complete</span>
+            <span className="text-2xl text-purple-600">
+              {Math.round(((currentIndex + 1) / words.length) * 100)}% 🎯
+            </span>
           </div>
-          <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-6 bg-gray-200 rounded-full overflow-hidden shadow-inner border-4 border-gray-300">
             <motion.div
-              className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+              className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 relative"
               initial={{ width: 0 }}
               animate={{ width: `${((currentIndex + 1) / words.length) * 100}%` }}
-              transition={{ duration: 0.5 }}
-            />
+              transition={{ duration: 0.5, type: 'spring' }}
+            >
+              <div className="absolute inset-0 bg-white/30 animate-pulse" />
+            </motion.div>
           </div>
         </div>
 
