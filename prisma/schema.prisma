@@ -1,0 +1,295 @@
+// Prisma Schema for English Buddy
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User Types: CHILD, PARENT, TEACHER
+enum UserRole {
+  CHILD
+  PARENT
+  TEACHER
+  ADMIN
+}
+
+enum DifficultyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum BadgeType {
+  VOCABULARY_MASTER
+  PRONUNCIATION_PRO
+  CONVERSATION_KING
+  DAILY_STREAK
+  PERFECT_SCORE
+  STORY_READER
+}
+
+// Users and Authentication
+model User {
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  name          String
+  role          UserRole  @default(CHILD)
+  age           Int?
+  avatarUrl     String?
+  password      String?   // Hashed password for parent/teacher accounts
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  children      ChildProfile[] @relation("ParentChildren")
+  childProfile  ChildProfile?  @relation("ChildUser")
+  sessions      Session[]
+
+  @@index([email])
+}
+
+model ChildProfile {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  parentId        String?
+
+  // Learning preferences
+  nativeLanguage  String   @default("vi") // Vietnamese, Spanish, etc.
+  difficultyLevel DifficultyLevel @default(BEGINNER)
+
+  // Gamification
+  totalPoints     Int      @default(0)
+  currentStreak   Int      @default(0)
+  longestStreak   Int      @default(0)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  user            User     @relation("ChildUser", fields: [userId], references: [id], onDelete: Cascade)
+  parent          User?    @relation("ParentChildren", fields: [parentId], references: [id])
+
+  progress        Progress[]
+  badges          UserBadge[]
+  sessions        LearningSession[]
+  pronunciations  PronunciationScore[]
+  conversations   Conversation[]
+
+  @@index([parentId])
+  @@index([userId])
+}
+
+// Vocabulary and Learning Content
+model VocabularyCategory {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  icon        String?
+  order       Int      @default(0)
+
+  words       VocabularyWord[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([order])
+}
+
+model VocabularyWord {
+  id              String   @id @default(cuid())
+  categoryId      String
+
+  word            String
+  definition      String
+  example         String?
+  imageUrl        String?
+  audioUrl        String?
+  phonetic        String?
+  difficultyLevel DifficultyLevel @default(BEGINNER)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  category        VocabularyCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  progress        Progress[]
+
+  @@index([categoryId])
+  @@index([difficultyLevel])
+}
+
+// Learning Progress Tracking
+model Progress {
+  id              String   @id @default(cuid())
+  childId         String
+  wordId          String
+
+  mastery         Int      @default(0) // 0-100
+  timesReviewed   Int      @default(0)
+  correctAnswers  Int      @default(0)
+  totalAttempts   Int      @default(0)
+
+  lastReviewedAt  DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  child           ChildProfile @relation(fields: [childId], references: [id], onDelete: Cascade)
+  word            VocabularyWord @relation(fields: [wordId], references: [id], onDelete: Cascade)
+
+  @@unique([childId, wordId])
+  @@index([childId])
+  @@index([wordId])
+}
+
+// Learning Sessions
+model LearningSession {
+  id              String   @id @default(cuid())
+  childId         String
+
+  type            String   // VOCABULARY, PRONUNCIATION, CONVERSATION, STORY, GAME
+  duration        Int      // seconds
+  pointsEarned    Int      @default(0)
+  accuracy        Float?   // 0-100
+
+  startedAt       DateTime
+  completedAt     DateTime
+  createdAt       DateTime @default(now())
+
+  child           ChildProfile @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+  @@index([startedAt])
+}
+
+// Pronunciation Scoring
+model PronunciationScore {
+  id              String   @id @default(cuid())
+  childId         String
+
+  word            String
+  audioUrl        String?
+
+  accuracy        Float    // 0-100
+  fluency         Float    // 0-100
+  pronunciation   Float    // 0-100
+  overallScore    Float    // 0-100
+
+  feedback        String?
+
+  createdAt       DateTime @default(now())
+
+  child           ChildProfile @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+  @@index([createdAt])
+}
+
+// AI Conversation
+model Conversation {
+  id              String   @id @default(cuid())
+  childId         String
+
+  topic           String?
+  mode            String   // DAILY, SITUATION, VOCABULARY_BASED
+
+  messages        ConversationMessage[]
+
+  startedAt       DateTime @default(now())
+  endedAt         DateTime?
+
+  child           ChildProfile @relation(fields: [childId], references: [id], onDelete: Cascade)
+
+  @@index([childId])
+  @@index([startedAt])
+}
+
+model ConversationMessage {
+  id              String   @id @default(cuid())
+  conversationId  String
+
+  role            String   // USER, ASSISTANT
+  content         String
+  audioUrl        String?
+
+  createdAt       DateTime @default(now())
+
+  conversation    Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+}
+
+// Gamification - Badges and Achievements
+model Badge {
+  id              String   @id @default(cuid())
+  name            String
+  description     String
+  type            BadgeType
+  iconUrl         String?
+  requirement     Int      // e.g., 100 words learned, 7-day streak
+
+  createdAt       DateTime @default(now())
+
+  users           UserBadge[]
+
+  @@index([type])
+}
+
+model UserBadge {
+  id              String   @id @default(cuid())
+  childId         String
+  badgeId         String
+
+  earnedAt        DateTime @default(now())
+
+  child           ChildProfile @relation(fields: [childId], references: [id], onDelete: Cascade)
+  badge           Badge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([childId, badgeId])
+  @@index([childId])
+}
+
+// Stories
+model Story {
+  id              String   @id @default(cuid())
+  title           String
+  content         String   @db.Text
+  imageUrl        String?
+  audioUrl        String?
+  difficultyLevel DifficultyLevel @default(BEGINNER)
+
+  comprehensionQuestions StoryQuestion[]
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([difficultyLevel])
+}
+
+model StoryQuestion {
+  id              String   @id @default(cuid())
+  storyId         String
+
+  question        String
+  options         String[] // JSON array of options
+  correctAnswer   Int      // index of correct option
+
+  story           Story @relation(fields: [storyId], references: [id], onDelete: Cascade)
+
+  @@index([storyId])
+}
+
+// Sessions for NextAuth
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

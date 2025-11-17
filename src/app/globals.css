@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 text-foreground min-h-screen;
+    font-family: 'Comic Neue', 'Comic Sans MS', cursive;
+  }
+}
+
+@layer components {
+  .kid-button {
+    @apply px-6 py-4 rounded-2xl font-bold text-lg shadow-lg transition-all duration-200 active:scale-95 hover:shadow-xl;
+  }
+
+  .kid-card {
+    @apply bg-white rounded-3xl shadow-xl p-6 border-4 border-transparent hover:border-primary-300 transition-all duration-300;
+  }
+
+  .animated-gradient {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Dyslexia-friendly font support */
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&family=Inter:wght@300;400;600;700&display=swap');
+
+/* Accessibility - High contrast mode */
+@media (prefers-contrast: high) {
+  body {
+    @apply bg-white text-black;
+  }
+
+  .kid-button {
+    @apply border-2 border-black;
+  }
+}
+
+/* Animation for stars and confetti */
+.star-bounce {
+  animation: star-bounce 0.6s ease-in-out;
+}
+
+@keyframes star-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5) rotate(180deg);
+  }
+}
